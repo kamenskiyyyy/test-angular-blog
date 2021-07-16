@@ -12,6 +12,8 @@ export class PostComponent implements OnInit {
 
   post: Post | undefined
   form: FormGroup
+  postTitle = ''
+  postText = ''
 
   constructor(
     private route: ActivatedRoute,
@@ -26,44 +28,39 @@ export class PostComponent implements OnInit {
     })
 
     if (!!this.post) {
-      this.form = new FormGroup({
-        title: new FormControl(this.post.title, [
-          Validators.required
-        ]),
-        text: new FormControl(this.post.text, [
-            Validators.required
-          ]
-        )
-      })
-    } else {
-      this.form = new FormGroup({
-        title: new FormControl('', [
-          Validators.required
-        ]),
-        text: new FormControl('', [
-            Validators.required
-          ]
-        )
-      })
+      this.postTitle = this.post.title
+      this.postText = this.post.text
     }
+
+    this.form = new FormGroup({
+      title: new FormControl('', [
+        Validators.required
+      ]),
+      text: new FormControl('', [
+          Validators.required
+        ]
+      )
+    })
   }
 
+  // Функция изменяет пост или создает новый
   submit() {
     // @ts-ignore
-    const {title, text} = {...this.form.value}
     if (this.post) {
       const id = this.post.id
-      this.postsService.editPost(title, text, id)
+      this.postsService.editPost(this.postTitle, this.postText, id)
     } else {
-      this.postsService.addPost(title, text)
+      this.postsService.addPost(this.postTitle, this.postText,)
     }
     this.router.navigate([''])
   }
 
+  // Функция удаляет пост
   deletePost(id) {
-    console.log(id)
-    this.postsService.removeById(id)
-    this.router.navigate([''])
+    if (confirm('Действительно удалить?')) {
+      console.log(id)
+      this.postsService.removeById(id)
+      this.router.navigate([''])
+    }
   }
-
 }

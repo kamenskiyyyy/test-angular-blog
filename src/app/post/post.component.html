@@ -7,19 +7,18 @@
     </ng-template>
 
     <form class="card" [formGroup]="form" (ngSubmit)="submit()">
-        <input class="card__input" type="text" placeholder="Введите заголовок" formControlName="title">
+        <input class="card__input" type="text" placeholder="Введите заголовок" [(ngModel)]="postTitle" formControlName="title">
         <div *ngIf="form.get('title').invalid && form.get('title').touched" class="validation">
             <small *ngIf="form.get('title').errors.required">
                 Заголовок не может быть пустым
             </small>
         </div>
-        <textarea class="card__input text" type="text" placeholder="Введите тест поста" formControlName="text"></textarea>
+        <textarea class="card__input text" type="text" placeholder="Введите тест поста" [(ngModel)]="postText" formControlName="text"></textarea>
         <div *ngIf="form.get('text').invalid && form.get('text').touched" class="validation">
             <small *ngIf="form.get('text').errors.required">
                 Текст поста не может отсутствовать
             </small>
         </div>
-
 
         <div class="buttons" *ngIf="post; else newPostButton">
             <button class="btn btn-danger" type="button" (click)="deletePost(post.id)">Удалить</button>
