@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {Post, PostsService} from "../posts.service";
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Post, PostsService} from "../posts/posts.service";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 
@@ -8,7 +8,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.scss']
 })
-export class PostComponent implements OnInit {
+export class PostComponent implements OnInit, OnDestroy {
 
   post: Post | undefined
   form: FormGroup
@@ -58,9 +58,12 @@ export class PostComponent implements OnInit {
   // Функция удаляет пост
   deletePost(id) {
     if (confirm('Действительно удалить?')) {
-      console.log(id)
       this.postsService.removeById(id)
       this.router.navigate([''])
     }
+  }
+
+  ngOnDestroy(): void {
+    this.route.params.subscribe().unsubscribe()
   }
 }
