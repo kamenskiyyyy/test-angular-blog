@@ -1,0 +1,14 @@
+<div class="container">
+    <h1>Блог</h1>
+
+    <button class="btn button_add" [routerLink]="'posts/create'">&#43; Добавить</button>
+
+    <div class="cards">
+        <div class="card" *ngFor="let post of postsService.posts">
+            <h4>{{post.title}}</h4>
+            <p>{{post.text}}</p>
+            <a [routerLink]="['/posts', post.id]">перейти</a>
+        </div>
+        <p *ngIf="postsService.posts.length <=0" class="message">Посты отсутствуют</p>
+    </div>
+</div>

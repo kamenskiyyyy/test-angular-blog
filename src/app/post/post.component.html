@@ -1,0 +1,34 @@
+<div class="container">
+    <button class="btn" routerLink="/">Назад</button>
+
+    <h1 *ngIf="post; else newPost">Запись {{post.title}}</h1>
+    <ng-template #newPost>
+        <h1 >Создать пост</h1>
+    </ng-template>
+
+    <form class="card" [formGroup]="form" (ngSubmit)="submit()">
+        <input class="card__input" type="text" placeholder="Введите заголовок" formControlName="title">
+        <div *ngIf="form.get('title').invalid && form.get('title').touched" class="validation">
+            <small *ngIf="form.get('title').errors.required">
+                Заголовок не может быть пустым
+            </small>
+        </div>
+        <textarea class="card__input text" type="text" placeholder="Введите тест поста" formControlName="text"></textarea>
+        <div *ngIf="form.get('text').invalid && form.get('text').touched" class="validation">
+            <small *ngIf="form.get('text').errors.required">
+                Текст поста не может отсутствовать
+            </small>
+        </div>
+
+
+        <div class="buttons" *ngIf="post; else newPostButton">
+            <button class="btn btn-danger" type="button" (click)="deletePost(post.id)">Удалить</button>
+            <button class="btn btn-danger" type="submit" [disabled]="form.invalid">Сохранить</button>
+        </div>
+        <ng-template #newPostButton>
+            <div class="buttons">
+                <button class="btn btn-danger" type="submit" [disabled]="form.invalid">Создать</button>
+            </div>
+        </ng-template>
+    </form>
+</div>

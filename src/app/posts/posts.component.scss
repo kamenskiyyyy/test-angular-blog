@@ -1,0 +1,67 @@
+.container {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+h1 {
+  text-align: center;
+}
+
+.button_add {
+  margin-top: 20px;
+  width: 150px;
+  height: 40px;
+  align-self: flex-end;
+}
+
+.cards {
+  margin: 20px auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card {
+  margin: 1rem;
+  padding: 1rem;
+  border: #ccc 1px dotted;
+  width: 290px;
+  display: flex;
+  flex-direction: column;
+
+  h4 {
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  p {
+    padding: 1rem;
+    height: 100px;
+    background: white;
+    -webkit-line-clamp: 3;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    border: 1px solid black;
+  }
+  a {
+    margin-top: 1rem;
+    width: 100%;
+    background: cornflowerblue;
+    border-radius: 10px;
+    text-decoration: none;
+    color: white;
+    text-align: center;
+    transition: linear 200ms;
+  }
+  a:hover {
+    opacity: 0.8;
+  }
+}
+
+.message {
+  margin: 40px auto;
+}
