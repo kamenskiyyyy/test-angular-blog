@@ -1,7 +1,7 @@
 <div class="container">
     <button class="btn" routerLink="/">Назад</button>
 
-    <h1 *ngIf="post; else newPost">Запись {{post.title}}</h1>
+    <h1 *ngIf="post; else newPost">Запись "{{post.title}}"</h1>
     <ng-template #newPost>
         <h1 >Создать пост</h1>
     </ng-template>
